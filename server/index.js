@@ -1,12 +1,13 @@
 import express from "express";
 import cors from "cors";
-import { fileURLtoPath } from "url";
+import path from "path";
+import { fileURLToPath } from "url";
 import { sequelize } from "./config/mysql.config.js";
 //agregar rutas
 
 const app = express();
 
-const __filename = fileURLtoPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const port = 8000;
 
