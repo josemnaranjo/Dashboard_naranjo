@@ -30,9 +30,17 @@ export const User = sequelize.define(
     },
     email: {
       type: DataTypes.STRING,
+      validate: {
+        isEmail: {msg:"El formato de correo no es correcto"},
+        notEmpty: true,
+      },
     },
     password: {
       type: DataTypes.STRING,
+      validate: {
+        min: 4,
+        notEmpty: true,
+      },
     },
   },
   {
