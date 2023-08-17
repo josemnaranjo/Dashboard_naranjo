@@ -71,3 +71,38 @@ export const Login = async (req, res) => {
     });
   }
 };
+
+export const EditUser = async (req, res) => {
+  try {
+    const { name, lastName, email } = req.body;
+    await User.update(
+      {
+        name,
+        lastName,
+        email,
+      },
+      { where: { email: email } }
+    );
+
+    res.json({ mensaje: "Datos del usuario actualizados con éxito" });
+  } catch (err) {
+    return res.json({
+      mensaje: "Ocurrió un error al intentar editar el usuario",
+      error: err.errors,
+    });
+  }
+};
+
+export const DeleteUser = async (req, res) => {
+  try {
+    const { email } = req.body;
+    await User.destroy({ where: { email: email } });
+    res.clearCookie("usertoken");
+    res.json({ mensaje: "Ususario borrado" });
+  } catch (err) {
+    return res.json({
+      mensaje: "Ocurrió un error al intentar borrar el usuario",
+      error: err.errors,
+    });
+  }
+};
