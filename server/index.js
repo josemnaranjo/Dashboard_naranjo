@@ -4,6 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { sequelize } from "./config/mysql.config.js";
 //agregar rutas
+import userRoutes from "./routes/user.routes.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(cors());
 
 //rutas
+app.use(userRoutes);
 
 async function main() {
   try {
