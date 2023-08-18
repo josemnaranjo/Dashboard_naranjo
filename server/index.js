@@ -6,7 +6,7 @@ import { sequelize } from "./config/mysql.config.js";
 //agregar rutas
 import userRoutes from "./routes/user.routes.js";
 import workdayRoutes from "./routes/workday.routes.js";
-import workerRoutes from "./routes/worker.routes";
+import workerRoutes from "./routes/worker.routes.js";
 
 const app = express();
 

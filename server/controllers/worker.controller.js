@@ -3,7 +3,7 @@ import { Workday } from "../models/Workday.js";
 import { Op } from "sequelize";
 import path from "path";
 import { fileURLToPath } from "url";
-import { wb, colStyle, contentStyle } from "../config/excel4node.config";
+import { wb, colStyle, contentStyle } from "../config/excel4node.config.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

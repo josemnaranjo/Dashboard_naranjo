@@ -1,5 +1,5 @@
 import { Workday } from "../models/Workday.js";
-import { Woker } from "../models/Worker.js";
+import { Worker } from "../models/Worker.js";
 import dayjs from "dayjs";
 
 export const checkIn = async (req, res) => {

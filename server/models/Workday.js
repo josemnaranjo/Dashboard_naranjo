@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/mysql.config.js";
 
-export const Worday = sequelize.define(
+export const Workday = sequelize.define(
   "Workday",
   {
     id: {
