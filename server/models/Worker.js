@@ -31,10 +31,10 @@ export const Worker = sequelize.define(
         msg: "El rut ya existe en la base de datos",
       },
     },
-    licenseStartDate: {
+    licenceStartDate: {
       type: DataTypes.DATE,
     },
-    licenseEndDate: {
+    licenceEndDate: {
       type: DataTypes.DATE,
     },
     workerHasLicence: {
