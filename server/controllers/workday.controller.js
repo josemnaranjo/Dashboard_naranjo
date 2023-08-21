@@ -6,16 +6,16 @@ export const checkIn = async (req, res) => {
   try {
     const { date } = req.params;
     const { rut } = req.body;
-    const checkInHour =
+    const startTime =
       dayjs().hour() + ":" + dayjs().minute() + ":" + dayjs().second();
 
-    const workerInfo = await Woker.findAll({
+    const workerInfo = await Worker.findAll({
       where: {
         rut: rut,
       },
     });
     const workerId = workerInfo[0].id;
-    const newWorkDay = await Workday.create({ date, checkInHour, workerId });
+    const newWorkDay = await Workday.create({ date, startTime, workerId });
     res.json({
       mensaje: "Registro de ingreso creado exitosamente",
       workdayInfo: newWorkDay,
@@ -32,17 +32,17 @@ export const checkOut = async (req, res) => {
   try {
     const { date } = req.params;
     const { rut } = req.body;
-    const checkoutHour =
+    const finishTime =
       dayjs().hour() + ":" + dayjs().minute() + ":" + dayjs().second();
-    const workerInfo = await Woker.findAll({
+    const workerInfo = await Worker.findAll({
       where: {
         rut: rut,
       },
     });
     const workerId = workerInfo[0].id;
     await Workday.update(
-      { checkoutHour },
-      { where: { date: date, id: workerId } }
+      { finishTime },
+      { where: { date: date, workerId: workerId } }
     );
     res.json({ mensaje: "Registro de salida creado exitosamente" });
   } catch (err) {

@@ -84,13 +84,13 @@ export const deleteOneWorker = async (req, res) => {
 
 export const updateWorker = async (req, res) => {
   try {
-    const { name, lastName, rut } = req.body;
-    const { workerRut } = req.params;
+    const { name, lastName } = req.body;
+    const { rut } = req.params;
     await Worker.update(
       { name, lastName, rut },
       {
         where: {
-          rut: workerRut,
+          rut: rut,
         },
       }
     );
@@ -129,7 +129,7 @@ export const updateLicence = async (req, res) => {
     const { rut } = req.params;
 
     await Worker.update(
-      { licenceStartDate, licenceEndDate, workerHasLecence: true },
+      { licenceStartDate, licenceEndDate, workerHasLicence: true },
       {
         where: {
           rut: rut,
@@ -156,6 +156,7 @@ export const resetLicence = async (req, res) => {
       },
       { where: { rut: rut } }
     );
+    res.json({ mensaje: "Licencia reestablecida" });
   } catch (err) {
     res.status(500).json({
       error: "Algo salió mal al momento de actualizar la licencia",
@@ -168,7 +169,7 @@ export const getWorkersWithLicence = async (req, res) => {
   try {
     const workersInfo = await Worker.findAll({
       where: {
-        workerHasLecence: true,
+        workerHasLicence: true,
       },
     });
     res.json(workersInfo);
@@ -183,19 +184,21 @@ export const getWorkersWithLicence = async (req, res) => {
 export const getMonthReport = async (req, res) => {
   try {
     const { startDate, endDate } = req.body;
+
     const monthInfo = await Workday.findAll({
       where: {
         date: {
           [Op.between]: [startDate, endDate],
         },
-        order: [["workerId", "ASC"]],
-        include: [
-          {
-            model: Worker,
-            paranoid: false,
-          },
-        ],
       },
+      order: [["workerId", "ASC"]],
+      include: [
+        {
+          model: Worker,
+          paranoid: false,
+        },
+      ],
+      paranoid: false,
     });
     res.json(monthInfo);
   } catch (err) {
@@ -244,10 +247,10 @@ export const downloadMonthReport = async (req, res) => {
       ws.cell(line, 5).string(datoActual.Worker.lastName).style(contentStyle);
       ws.cell(line, 6).string(datoActual.Worker.rut).style(contentStyle);
       ws.cell(line, 7)
-        .string(datoActual.Worker.inicioLicencia)
+        .string(datoActual.Worker.licenceStartDate)
         .style(contentStyle);
       ws.cell(line, 8)
-        .string(datoActual.Worker.finLicencia)
+        .string(datoActual.Worker.licenceEndDate)
         .style(contentStyle);
       line++;
     });

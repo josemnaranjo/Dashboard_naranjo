@@ -20,7 +20,7 @@ router.get("/get-workers", getAllWorkers);
 router.get("/get-worker/:rut", getOneWorker);
 router.delete("/delete-worker/:rut", deleteOneWorker);
 router.put("/update-worker/:rut", updateWorker);
-router.get("/get-workers-of-workday/date", getAllWorkersOfAWorday);
+router.get("/get-workers-of-workday/:date", getAllWorkersOfAWorday);
 router.put("/update-licence/:rut", updateLicence);
 router.post("/reset-licence", resetLicence);
 router.get("/get-workers-with-licence", getWorkersWithLicence);
