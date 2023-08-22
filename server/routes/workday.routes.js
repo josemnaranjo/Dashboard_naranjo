@@ -9,6 +9,6 @@ const router = Router();
 
 router.post("/check-in/:date", checkIn);
 router.put("/check-out/:date", checkOut);
-router.post("/set-absent/:date", setAbsent);
+router.put("/set-absent/:date", setAbsent);
 
 export default router;

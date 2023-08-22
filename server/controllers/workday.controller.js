@@ -63,6 +63,7 @@ export const setAbsent = async (req, res) => {
         rut: rut,
       },
     });
+
     const workerId = workerInfo[0].id;
 
     await Workday.update(
