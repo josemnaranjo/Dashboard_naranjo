@@ -1,10 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-/*eslint-env node*/
-
-module.exports = {
-  content: ["./src/**/*.{html,js}"],
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
   },
-  plugins: [require("tailwindcss-radix")()],
+  plugins: [],
 };
