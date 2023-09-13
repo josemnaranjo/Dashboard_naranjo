@@ -28,7 +28,7 @@ export const Register = async (req, res) => {
 export const Logout = async (req, res) => {
   try {
     res.clearCookie("usertoken");
-    res.json({ mensaje: "Ususario deslogueado" });
+    res.json({ mensaje: "Ususario deslogueado", success: true });
   } catch (err) {
     return res.json({
       mensaje: "Ocurrió un error al intentar desloguearse",
