@@ -1,7 +1,6 @@
 import { User } from "../models/User.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { where } from "sequelize";
 
 export const Register = async (req, res) => {
   try {
@@ -111,6 +110,7 @@ export const DeleteUser = async (req, res) => {
 export const GetUser = async (req, res) => {
   try {
     const { email } = req.body;
+    console.log(email);
     const user = await User.findAll({ where: { email: email } });
     res.json(user);
   } catch (err) {
