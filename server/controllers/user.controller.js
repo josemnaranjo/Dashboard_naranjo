@@ -1,6 +1,7 @@
 import { User } from "../models/User.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { where } from "sequelize";
 
 export const Register = async (req, res) => {
   try {
@@ -102,6 +103,19 @@ export const DeleteUser = async (req, res) => {
   } catch (err) {
     return res.json({
       mensaje: "Ocurrió un error al intentar borrar el usuario",
+      error: err.errors,
+    });
+  }
+};
+
+export const GetUser = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findAll({ where: { email: email } });
+    res.json(user);
+  } catch (err) {
+    return res.json({
+      mensaje: "Ocurrio un error al intentar obtener la información",
       error: err.errors,
     });
   }
