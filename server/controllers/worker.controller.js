@@ -17,13 +17,16 @@ export const createWorker = async (req, res) => {
         lastName: lastName,
         rut: rut,
       });
-      res.json({ mensaje: "Trabajador creado", newWorker });
+      res.json({ mensaje: "Trabajador creado exitosamente", newWorker });
     } else {
-        const restoreTrabajador = await Trabajador.restore({
-          where: { rut: rut },
-        });
-        res.json({ message: "Trabajador creado exitosamente", restoreTrabajador });
-      }
+      const restoreTrabajador = await Trabajador.restore({
+        where: { rut: rut },
+      });
+      res.json({
+        mensaje: "Trabajador creado exitosamente",
+        restoreTrabajador,
+      });
+    }
   } catch (err) {
     res.status(500).json({
       mensaje: "Algo salió mal al crear un nuevo trabajador",
