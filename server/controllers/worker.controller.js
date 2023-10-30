@@ -95,7 +95,7 @@ export const updateWorker = async (req, res) => {
     const { name, lastName } = req.body;
     const { rut } = req.params;
     await Worker.update(
-      { name, lastName, rut },
+      { name, lastName },
       {
         where: {
           rut: rut,
