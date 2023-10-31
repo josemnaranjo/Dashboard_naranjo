@@ -1,6 +1,6 @@
 import { Worker } from "../models/Worker.js";
 import { Workday } from "../models/Workday.js";
-import { Op } from "sequelize";
+import { Op, where } from "sequelize";
 import path from "path";
 import { fileURLToPath } from "url";
 import { wb, colStyle, contentStyle } from "../config/excel4node.config.js";
@@ -92,17 +92,12 @@ export const deleteOneWorker = async (req, res) => {
 
 export const updateWorker = async (req, res) => {
   try {
-    const { name, lastName } = req.body;
-    const { rut } = req.params;
-    await Worker.update(
-      { name, lastName },
-      {
-        where: {
-          rut: rut,
-        },
-      }
+    const { name, lastName, rut, id } = req.body;
+    const updatedWorker = await Worker.update(
+      { name: name, lastName: lastName, rut: rut },
+      { where: {id: id } }
     );
-    res.json({ mensaje: "Datos del trabajador actualizados" });
+    res.json({ mensaje: "Datos del trabajador actualizados", updatedWorker });
   } catch (err) {
     res.status(500).json({
       mensaje:
