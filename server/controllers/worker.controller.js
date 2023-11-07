@@ -19,13 +19,11 @@ export const createWorker = async (req, res) => {
       });
       res.json({ mensaje: "Trabajador creado exitosamente", newWorker });
     } else {
-      const workerToRestore = await Worker.restore({
+      await Worker.restore({
         where: { rut: rut },
       });
-      console.log(workerToRestore);
       res.json({
-        mensaje: "Trabajador creado exitosamente",
-        workerToRestore,
+        mensaje: "Trabajador restaurado exitosamente",
       });
     }
   } catch (err) {
