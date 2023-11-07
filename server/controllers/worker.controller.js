@@ -19,12 +19,13 @@ export const createWorker = async (req, res) => {
       });
       res.json({ mensaje: "Trabajador creado exitosamente", newWorker });
     } else {
-      const restoreTrabajador = await Trabajador.restore({
+      const workerToRestore = await Worker.restore({
         where: { rut: rut },
       });
+      console.log(workerToRestore);
       res.json({
         mensaje: "Trabajador creado exitosamente",
-        restoreTrabajador,
+        workerToRestore,
       });
     }
   } catch (err) {
@@ -95,7 +96,7 @@ export const updateWorker = async (req, res) => {
     const { name, lastName, rut, id } = req.body;
     const updatedWorker = await Worker.update(
       { name: name, lastName: lastName, rut: rut },
-      { where: {id: id } }
+      { where: { id: id } }
     );
     res.json({ mensaje: "Datos del trabajador actualizados", updatedWorker });
   } catch (err) {
