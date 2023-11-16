@@ -19,16 +19,23 @@ export const createWorker = async (req, res) => {
       });
       res.json({ mensaje: "Trabajador creado exitosamente", newWorker });
     } else {
-      await Worker.restore({
-        where: { rut: rut },
-      });
-      res.json({
-        mensaje: "Trabajador restaurado exitosamente",
-      });
+      const workerVerification = await Worker.findAll({ where: { rut: rut } });
+      if (!workerVerification.length) {
+        await Worker.restore({
+          where: { rut: rut },
+        });
+        res.json({
+          mensaje: "Trabajador restaurado exitosamente",
+        });
+      } else {
+        res.json({
+            mensaje: "El trabajador ya existe en la base de datos"
+        })
+      }
     }
   } catch (err) {
     res.status(500).json({
-      mensaje: "Algo salió mal al crear un nuevo trabajador",
+      mensaje: "Algo salió mal al crear/actualizar un nuevo trabajador",
       errores: err,
     });
   }
