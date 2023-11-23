@@ -29,8 +29,8 @@ export const createWorker = async (req, res) => {
         });
       } else {
         res.json({
-            mensaje: "El trabajador ya existe en la base de datos"
-        })
+          mensaje: "El trabajador ya existe en la base de datos",
+        });
       }
     }
   } catch (err) {
@@ -73,14 +73,7 @@ export const getOneWorker = async (req, res) => {
 export const deleteOneWorker = async (req, res) => {
   try {
     const { rut } = req.params;
-    const workerInfo = await Worker.findAll({ where: { rut: rut } });
-    const workerId = workerInfo[0].id;
 
-    await Workday.destroy({
-      where: {
-        workerId: workerId,
-      },
-    });
     await Worker.destroy({
       where: {
         rut: rut,
