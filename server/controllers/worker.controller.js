@@ -131,7 +131,11 @@ export const updateLicence = async (req, res) => {
     const { rut } = req.params;
 
     await Worker.update(
-      { licenceStartDate, licenceEndDate, workerHasLicence: true },
+      {
+        licenceStartDate: licenceStartDate,
+        licenceEndDate: licenceEndDate,
+        workerHasLicence: true,
+      },
       {
         where: {
           rut: rut,
