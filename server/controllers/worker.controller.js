@@ -158,7 +158,7 @@ export const resetLicence = async (req, res) => {
       {
         licenceStartDate: null,
         licenceEndDate: null,
-        workerHasLecence: false,
+        workerHasLicence: false,
       },
       { where: { rut: rut } }
     );
