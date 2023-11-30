@@ -142,7 +142,11 @@ export const updateLicence = async (req, res) => {
         },
       }
     );
-    res.json({ message: "Inicio y termino de licencia médica actualizada" });
+    const workerWithLicense = await Worker.findAll({where:{rut:rut}})
+    res.json({
+      message: "Inicio y termino de licencia médica actualizada",
+      workerWithLicense,
+    });
   } catch (err) {
     res.status(500).json({
       mensaje: "Algo salió mal al intentar ingresar la licencia médica",
