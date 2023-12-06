@@ -125,7 +125,7 @@ export const getAllWorkersOfAWorday = async (req, res) => {
   }
 };
 
-export const updateLicence = async (req, res) => {
+export const createLicence = async (req, res) => {
   try {
     const { licenceStartDate, licenceEndDate } = req.body;
     const { rut } = req.params;
