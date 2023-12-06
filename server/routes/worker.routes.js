@@ -21,7 +21,7 @@ router.get("/get-worker/:rut", getOneWorker);
 router.delete("/delete-worker/:rut", deleteOneWorker);
 router.put("/update-worker", updateWorker);
 router.get("/get-workers-of-workday/:date", getAllWorkersOfAWorday);
-router.post("/update-licence/:rut", createLicence);
+router.post("/create-licence/:rut", createLicence);
 router.post("/reset-licence", resetLicence);
 router.get("/get-workers-with-licence", getWorkersWithLicence);
 router.post("/get-month-report", getMonthReport);
